@@ -1,4 +1,4 @@
-# V 1.0.0
+# V 2.3
 # Don't make virus
 
 import ctypes
@@ -460,3 +460,4 @@ if __name__ == "__main__":
     threading.Thread(target=bytebeat_audio_loop, daemon=True).start()
 
     apply_screen_effects_and_shake_mouse()
+
